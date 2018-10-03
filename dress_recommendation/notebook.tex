@@ -1,0 +1,1935 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{dress\_recommendation}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Clean Data}\label{clean-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{c+c1}{\PYZsh{} set test size for models}
+         \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}98}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KNeighborsClassifier}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{os}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}99}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{raw\PYZus{}data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dress\PYZus{}raw.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}99}]:}      Dress\_ID    Style    Price  Rating Size  Season NeckLine SleeveLength  \textbackslash{}
+         0  1006032852     Sexy      Low     4.6    M  Summer   o-neck    sleevless   
+         1  1212192089   Casual      Low     0.0    L  Summer   o-neck        Petal   
+         2  1190380701  vintage     High     0.0    L  Automn   o-neck         full   
+         3   966005983    Brief  Average     4.6    L  Spring   o-neck         full   
+         4   876339541     cute      Low     4.5    M  Summer   o-neck    butterfly   
+         
+           waiseline       Material FabricType  Decoration Pattern Type  Recommendation  
+         0    empire            NaN    chiffon     ruffles       animal               1  
+         1   natural     microfiber        NaN     ruffles       animal               0  
+         2   natural       polyster        NaN         NaN        print               0  
+         3   natural           silk    chiffon  embroidary        print               1  
+         4   natural  chiffonfabric    chiffon         bow          dot               0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}100}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}100}]:} 500
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{c+c1}{\PYZsh{} Round rating:}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}Rating\PYZdq{}] = df[\PYZdq{}Rating\PYZdq{}].round()}
+         \PY{c+c1}{\PYZsh{} df.head()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}93}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decoration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decoration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nothing}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}94}]:} \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Dress\PYZus{}ID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}95}]:} \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{o}{\PYZti{}}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}95}]:}    Style    Price  Rating  Size  Season NeckLine  SleeveLength waiseline  \textbackslash{}
+         0   Sexy      Low     4.6     M  Summer   o-neck     sleevless    empire   
+         1  Brief  Average     4.6     L  Spring   o-neck          full   natural   
+         2   cute      Low     4.5     M  Summer   o-neck     butterfly   natural   
+         3  party  Average     5.0  free  Summer   o-neck          full   natural   
+         4   sexy      Low     4.7     M  Winter   o-neck  threequarter       NaN   
+         
+                 Material  FabricType  Decoration Pattern Type  Recommendation  
+         0            NaN     chiffon     ruffles       animal               1  
+         1           silk     chiffon  embroidary        print               1  
+         2  chiffonfabric     chiffon         bow          dot               0  
+         3       polyster  broadcloth        lace        solid               0  
+         4            NaN     chiffon        lace        print               1  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}96}]:} \PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}96}]:} Style               0
+         Price               2
+         Rating              0
+         Size                0
+         Season              1
+         NeckLine            3
+         SleeveLength        1
+         waiseline          66
+         Material          101
+         FabricType        203
+         Decoration          0
+         Pattern Type       81
+         Recommendation      0
+         dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} ['Style',
+         'Price',
+         'Rating',
+         'Size',
+         'Season',
+         'NeckLine',
+         'SleeveLength',
+         'waiseline',
+         'Material',
+         'FabricType',
+         'Decoration',
+         'Pattern Type',
+         'Recommendation']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} correct WaistLine typo}
+         \PY{n}{df}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{waiseline}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WaistLine}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{cat\PYZus{}columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Style}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Season}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NeckLine}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SleeveLength}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WaistLine}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Material}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FabricType}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Decoration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pattern Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{df}\PY{p}{[}\PY{n}{cat\PYZus{}columns}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{cat\PYZus{}columns}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:}    Style    Price  Rating  Size  Season NeckLine  SleeveLength WaistLine  \textbackslash{}
+         0   sexy      low     5.0     m  summer   o-neck     sleevless    empire   
+         1  brief  average     5.0     l  spring   o-neck          full   natural   
+         2   cute      low     4.0     m  summer   o-neck     butterfly   natural   
+         3  party  average     5.0  free  summer   o-neck          full   natural   
+         4   sexy      low     5.0     m  winter   o-neck  threequarter       nan   
+         
+                 Material  FabricType  Decoration Pattern Type  Recommendation  
+         0            nan     chiffon     ruffles       animal               1  
+         1           silk     chiffon  embroidary        print               1  
+         2  chiffonfabric     chiffon         bow          dot               0  
+         3       polyster  broadcloth        lace        solid               0  
+         4            nan     chiffon        lace        print               1  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} correct typos}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{average}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{medium}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Season column: correct typos:}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Season}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Season}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{automn}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{autumn}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} SleeveLength Column: Correct typos:}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cap\PYZhy{}sleeves}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{capsleeves}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{half}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{halfsleeve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sleveless}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sleeveless}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sleevless}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sleeveless}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sleeevless}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sleeveless}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sleeevless}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sleeveless}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{thressqatar}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{threequarter}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{urndowncollor}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{turndowncollar}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{turndowncollor}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{turndowncollar}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{leapord}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{leopard}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Fabric Type: correct typos:}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FabricType}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FabricType}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shiffon}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{chiffon}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FabricType}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FabricType}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{flannael}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{flannel}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:}    Style   Price  Rating  Size  Season NeckLine  SleeveLength WaistLine  \textbackslash{}
+         0   sexy     low     5.0     m  summer   o-neck    sleeveless    empire   
+         1  brief  medium     5.0     l  spring   o-neck          full   natural   
+         2   cute     low     4.0     m  summer   o-neck     butterfly   natural   
+         3  party  medium     5.0  free  summer   o-neck          full   natural   
+         4   sexy     low     5.0     m  winter   o-neck  threequarter       nan   
+         
+                 Material  FabricType  Decoration Pattern Type  Recommendation  
+         0            nan     chiffon     ruffles       animal               1  
+         1           silk     chiffon  embroidary        print               1  
+         2  chiffonfabric     chiffon         bow          dot               0  
+         3       polyster  broadcloth        lace        solid               0  
+         4            nan     chiffon        lace        print               1  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} ['Style',
+          'Price',
+          'Rating',
+          'Size',
+          'Season',
+          'NeckLine',
+          'SleeveLength',
+          'WaistLine',
+          'Material',
+          'FabricType',
+          'Decoration',
+          'Pattern Type',
+          'Recommendation']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{:}
+             \PY{n}{df}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Distribution of }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{col}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_11.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_12.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} reduce 10 levels in style feature to 5 levels}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Style}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Style}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sexy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{special\PYZus{}occasion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Style}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Style}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{party}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{special\PYZus{}occasion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Style}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Style}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{novelty}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{other}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Style}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Style}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bohemian}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{boho\PYZus{}vintage}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Style}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Style}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vintage}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{boho\PYZus{}vintage}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Style}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Style}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fashion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{other}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Style}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Style}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{brief}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{casual}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Style}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Style}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cute}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{casual}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:}                 Style Price  Rating  Size  Season NeckLine SleeveLength  \textbackslash{}
+         186  special\_occasion   nan     5.0  free  winter   o-neck   sleeveless   
+         187  special\_occasion   nan     4.0     l  summer      nan         full   
+         
+             WaistLine Material FabricType  Decoration Pattern Type  Recommendation  
+         186    empire      nan        nan  embroidary          nan               1  
+         187       nan      nan        nan     nothing          nan               1  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} fill two \PYZdq{}nan\PYZdq{} values in Price with the most common value\PYZhy{}\PYZhy{}\PYZdq{}medium\PYZdq{}}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{medium}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Season}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:}                 Style   Price  Rating Size Season    NeckLine SleeveLength  \textbackslash{}
+         193  special\_occasion  medium     5.0    l    nan  sweetheart   sleeveless   
+         
+             WaistLine Material FabricType Decoration Pattern Type  Recommendation  
+         193    empire      nan        nan      pleat          nan               1  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} fill the \PYZdq{}nan\PYZdq{} value in Season with the most common value\PYZhy{}\PYZhy{}\PYZdq{}summer\PYZdq{}}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Season}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Season}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{summer}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:}                 Style   Price  Rating Size  Season NeckLine SleeveLength  \textbackslash{}
+         187  special\_occasion  medium     4.0    l  summer      nan         full   
+         244            casual  medium     4.0    m  summer      nan          nan   
+         293            casual     low     5.0    l  summer      nan   sleeveless   
+         
+             WaistLine Material FabricType Decoration Pattern Type  Recommendation  
+         187       nan      nan        nan    nothing          nan               1  
+         244   natural   cotton    chiffon    nothing        solid               0  
+         293       nan   cotton        nan    nothing        solid               1  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} fill three \PYZdq{}nan\PYZdq{} values in NeckLine with the most common value\PYZhy{}\PYZhy{}\PYZdq{}o\PYZhy{}neck\PYZdq{}}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o\PYZhy{}neck}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} There are 14 levels in feature \PYZdq{}NeckLine\PYZdq{}. Reduce it to 7:}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bowneck}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bow\PYZus{}and\PYZus{}ruffle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ruffled}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bow\PYZus{}and\PYZus{}ruffle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{slash\PYZhy{}neck}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{slash\PYZus{}and\PYZus{}boat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{boat\PYZhy{}neck}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{slash\PYZus{}and\PYZus{}boat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sweetheart}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sweetheart\PYZus{}and\PYZus{}square}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sqare\PYZhy{}collor}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sweetheart\PYZus{}and\PYZus{}square}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{backless}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{other}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{peterpan\PYZhy{}collor}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{other}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{halter}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{other}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{open}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{other}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NeckLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{scoop}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{other}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:}       Style   Price  Rating Size  Season NeckLine SleeveLength WaistLine  \textbackslash{}
+         244  casual  medium     4.0    m  summer   o-neck          nan   natural   
+         
+             Material FabricType Decoration Pattern Type  Recommendation  
+         244   cotton    chiffon    nothing        solid               0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} fill the \PYZdq{}nan\PYZdq{} value in SleeveLength with the most common value\PYZhy{}\PYZhy{}\PYZdq{}sleeveless\PYZdq{}}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sleeveless}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} array(['sleeveless', 'full', 'butterfly', 'threequarter', 'short',
+                'halfsleeve', 'turndowncollar', 'capsleeves'], dtype=object)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c+c1}{\PYZsh{} There are 8 levels in feature \PYZdq{}SleeveLength\PYZdq{}. Reduce it to 5:}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{turndowncollar}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{full}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{butterfly}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{halfsleeve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SleeveLength}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{capsleeves}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{short}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{WaistLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:}                 Style      Price  Rating  Size  Season        NeckLine  \textbackslash{}
+         4    special\_occasion        low     5.0     m  winter          o-neck   
+         6              casual        low     5.0     m  summer  slash\_and\_boat   
+         7              casual     medium     5.0     l  spring          o-neck   
+         10   special\_occasion     medium     4.0     l  autumn          o-neck   
+         20   special\_occasion       high     5.0     m  spring          o-neck   
+         33             casual        low     4.0  free  summer          o-neck   
+         49             casual        low     5.0     l  spring          o-neck   
+         50             casual     medium     5.0    xl  winter  slash\_and\_boat   
+         51       boho\_vintage  very-high     5.0  free  winter          v-neck   
+         56             casual        low     5.0     l  summer  slash\_and\_boat   
+         57   special\_occasion     medium     4.0     s  autumn          v-neck   
+         59             casual     medium     5.0     m  winter           other   
+         64              other     medium     4.0  free  summer           other   
+         66       boho\_vintage        low     5.0  free  summer          o-neck   
+         71             casual     medium     5.0     l  autumn          o-neck   
+         77             casual        low     5.0     l  autumn          o-neck   
+         88               work     medium     5.0     m  spring          v-neck   
+         92             casual        low     5.0     m  autumn          o-neck   
+         93             casual     medium     4.0  free  summer  slash\_and\_boat   
+         95   special\_occasion        low     4.0     l  spring          o-neck   
+         96             casual     medium     5.0     m  autumn          o-neck   
+         97             casual        low     5.0  free  summer          o-neck   
+         100      boho\_vintage     medium     4.0  free  winter          o-neck   
+         105            casual        low     5.0  free  summer          o-neck   
+         106  special\_occasion        low     5.0  free  spring          v-neck   
+         108            casual     medium     4.0  free  autumn  slash\_and\_boat   
+         122  special\_occasion        low     5.0     m  winter  slash\_and\_boat   
+         131            casual     medium     5.0     m  winter          o-neck   
+         133  special\_occasion     medium     5.0  free  summer          v-neck   
+         137            casual     medium     4.0     m  autumn          v-neck   
+         ..                {\ldots}        {\ldots}     {\ldots}   {\ldots}     {\ldots}             {\ldots}   
+         182            casual     medium     5.0     m  autumn          v-neck   
+         183            casual        low     4.0     m  winter          v-neck   
+         187  special\_occasion     medium     4.0     l  summer          o-neck   
+         197  special\_occasion  very-high     4.0     l  winter          v-neck   
+         198            casual        low     4.0  free  summer          o-neck   
+         201  special\_occasion     medium     5.0  free  winter          o-neck   
+         203  special\_occasion  very-high     4.0     m  spring          v-neck   
+         209  special\_occasion     medium     5.0     m  spring          o-neck   
+         212  special\_occasion  very-high     5.0     l  spring  slash\_and\_boat   
+         213              work     medium     5.0  free  winter          o-neck   
+         220  special\_occasion       high     4.0     m  winter          o-neck   
+         228  special\_occasion        low     5.0  free  spring          v-neck   
+         236  special\_occasion     medium     4.0     m  summer  bow\_and\_ruffle   
+         257            casual     medium     4.0     m  spring          o-neck   
+         264            casual     medium     5.0     m  summer          o-neck   
+         265  special\_occasion        low     4.0  free  summer  slash\_and\_boat   
+         267  special\_occasion        low     5.0  free  summer          v-neck   
+         270  special\_occasion     medium     4.0     s  winter          v-neck   
+         282            casual        low     1.0     m  spring          o-neck   
+         285              work     medium     5.0     m  spring          v-neck   
+         293            casual        low     5.0     l  summer          o-neck   
+         296      boho\_vintage     medium     4.0  free  summer          o-neck   
+         298            casual     medium     5.0     m  spring          o-neck   
+         303            casual     medium     5.0  free  winter          o-neck   
+         316  special\_occasion     medium     5.0     m  summer          o-neck   
+         324            casual     medium     5.0     m  summer          o-neck   
+         341            casual        low     4.0  free  spring          o-neck   
+         353  special\_occasion     medium     5.0     m  winter          o-neck   
+         354            casual     medium     5.0     m  summer          o-neck   
+         358            casual        low     4.0  free  summer          o-neck   
+         
+              SleeveLength WaistLine       Material FabricType Decoration Pattern Type  \textbackslash{}
+         4    threequarter       nan            nan    chiffon       lace        print   
+         6           short       nan         cotton        nan     sashes        solid   
+         7           short       nan         cotton        nan     sashes        solid   
+         10           full       nan         cotton        nan    beading        solid   
+         20   threequarter       nan            nan        nan    nothing        print   
+         33     sleeveless       nan       milksilk        nan    nothing       animal   
+         49          short       nan  chiffonfabric    chiffon        bow          dot   
+         50           full       nan         cotton        nan    nothing    geometric   
+         51     sleeveless       nan       polyster        nan    nothing          nan   
+         56          short       nan            nan    chiffon    nothing    patchwork   
+         57     sleeveless       nan          rayon    chiffon    nothing    patchwork   
+         59   threequarter       nan         cotton        nan    nothing        solid   
+         64           full       nan         cotton        nan   sequined        solid   
+         66          short       nan            nan        nan    nothing       animal   
+         71     halfsleeve       nan            nan        nan       lace          nan   
+         77           full       nan         cotton    chiffon       lace        print   
+         88           full       nan            nan    chiffon    nothing          nan   
+         92           full       nan         cotton        nan    nothing        solid   
+         93     sleeveless       nan            nan        nan    nothing          nan   
+         95     sleeveless       nan            nan        nan       lace        solid   
+         96     sleeveless       nan         cotton        nan    nothing       animal   
+         97     sleeveless       nan            nan    chiffon    nothing        print   
+         100         short       nan  chiffonfabric    chiffon    nothing        print   
+         105    sleeveless       nan            nan        nan    nothing        print   
+         106    sleeveless       nan            nan        nan   sequined        solid   
+         108          full       nan            nan        nan    nothing        solid   
+         122    sleeveless       nan          nylon        nan     sashes        solid   
+         131          full       nan            nan        nan    nothing       animal   
+         133    sleeveless       nan            nan        nan    nothing          nan   
+         137          full       nan            nan    chiffon     sashes          nan   
+         ..            {\ldots}       {\ldots}            {\ldots}        {\ldots}        {\ldots}          {\ldots}   
+         182    sleeveless       nan       polyster        nan    nothing          nan   
+         183          full       nan         cotton        nan    nothing          nan   
+         187          full       nan            nan        nan    nothing          nan   
+         197    sleeveless       nan            nan        nan       lace          nan   
+         198    sleeveless       nan            nan        nan    nothing          nan   
+         201    sleeveless       nan       polyster        nan    nothing          nan   
+         203         short       nan            nan        nan       lace          nan   
+         209    sleeveless       nan            nan        nan    nothing          nan   
+         212    sleeveless       nan            nan    chiffon    flowers          nan   
+         213    halfsleeve       nan     microfiber        nan    nothing          nan   
+         220    sleeveless       nan            nan        nan    nothing          nan   
+         228    sleeveless       nan            nan        nan   sequined          nan   
+         236    sleeveless       nan         cotton    chiffon    nothing        solid   
+         257    halfsleeve       nan            nan        nan    nothing          nan   
+         264  threequarter       nan  chiffonfabric    chiffon     ruched        solid   
+         265    sleeveless       nan       polyster   corduroy    nothing          nan   
+         267    sleeveless       nan            nan        nan    nothing          nan   
+         270    sleeveless       nan       polyster        nan    nothing          nan   
+         282    halfsleeve       nan            nan    chiffon    nothing          nan   
+         285    sleeveless       nan            nan        nan    nothing          nan   
+         293    sleeveless       nan         cotton        nan    nothing        solid   
+         296  threequarter       nan            nan        nan  hollowout          nan   
+         298  threequarter       nan        spandex        nan    nothing          nan   
+         303    sleeveless       nan       polyster        nan     sashes        solid   
+         316          full       nan         cotton        nan    nothing        solid   
+         324    sleeveless       nan         cotton        nan    nothing          dot   
+         341          full       nan            nan    chiffon     sashes         none   
+         353    halfsleeve       nan         cotton        nan       lace          nan   
+         354    halfsleeve       nan            nan        nan    nothing          nan   
+         358    sleeveless       nan            nan        nan    nothing       animal   
+         
+              Recommendation  
+         4                 1  
+         6                 0  
+         7                 1  
+         10                0  
+         20                0  
+         33                0  
+         49                0  
+         50                1  
+         51                1  
+         56                1  
+         57                1  
+         59                0  
+         64                0  
+         66                1  
+         71                0  
+         77                0  
+         88                0  
+         92                0  
+         93                1  
+         95                0  
+         96                1  
+         97                1  
+         100               0  
+         105               0  
+         106               1  
+         108               1  
+         122               1  
+         131               0  
+         133               0  
+         137               1  
+         ..              {\ldots}  
+         182               1  
+         183               1  
+         187               1  
+         197               1  
+         198               1  
+         201               0  
+         203               1  
+         209               1  
+         212               1  
+         213               0  
+         220               1  
+         228               1  
+         236               0  
+         257               1  
+         264               0  
+         265               0  
+         267               0  
+         270               0  
+         282               0  
+         285               1  
+         293               1  
+         296               0  
+         298               0  
+         303               0  
+         316               1  
+         324               0  
+         341               1  
+         353               1  
+         354               0  
+         358               0  
+         
+         [66 rows x 13 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{} fill the \PYZdq{}nan\PYZdq{} value in WaistLine with the most common value\PYZhy{}\PYZhy{}\PYZdq{}natural\PYZdq{}}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{WaistLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{WaistLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{natural}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{} There are 4 levels in feature \PYZdq{}SleeveLength\PYZdq{}. Reduce it to 3:}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{WaistLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{WaistLine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{princess}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{empire}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:}                 Style   Price  Rating  Size  Season               NeckLine  \textbackslash{}
+         0    special\_occasion     low     5.0     m  summer                 o-neck   
+         4    special\_occasion     low     5.0     m  winter                 o-neck   
+         8        boho\_vintage  medium     5.0  free  autumn                 o-neck   
+         11             casual     low     4.0     m  summer                 o-neck   
+         14   special\_occasion  medium     5.0     m  spring                 o-neck   
+         19             casual  medium     4.0     l  spring                 o-neck   
+         20   special\_occasion    high     5.0     m  spring                 o-neck   
+         22       boho\_vintage  medium     5.0  free  winter                 o-neck   
+         32   special\_occasion     low     5.0  free  summer                 v-neck   
+         37   special\_occasion     low     5.0     l  autumn                 o-neck   
+         40             casual  medium     5.0     m  spring                 o-neck   
+         55       boho\_vintage     low     5.0     m  summer                 o-neck   
+         56             casual     low     5.0     l  summer         slash\_and\_boat   
+         58   special\_occasion     low     5.0     m  autumn                 o-neck   
+         62       boho\_vintage     low     5.0     s  summer                 o-neck   
+         65             casual  medium     5.0     l  summer                 v-neck   
+         66       boho\_vintage     low     5.0  free  summer                 o-neck   
+         71             casual  medium     5.0     l  autumn                 o-neck   
+         73             casual  medium     5.0     l  autumn         slash\_and\_boat   
+         74   special\_occasion  medium     5.0     m  spring                 o-neck   
+         75             casual  medium     4.0     l  winter                 o-neck   
+         81   special\_occasion     low     5.0  free  spring                 o-neck   
+         83             casual  medium     4.0     m  summer                 o-neck   
+         86   special\_occasion  medium     4.0  free  autumn                 v-neck   
+         88               work  medium     5.0     m  spring                 v-neck   
+         90       boho\_vintage  medium     5.0     l  autumn                 o-neck   
+         93             casual  medium     4.0  free  summer         slash\_and\_boat   
+         95   special\_occasion     low     4.0     l  spring                 o-neck   
+         97             casual     low     5.0  free  summer                 o-neck   
+         105            casual     low     5.0  free  summer                 o-neck   
+         ..                {\ldots}     {\ldots}     {\ldots}   {\ldots}     {\ldots}                    {\ldots}   
+         223      boho\_vintage  medium     5.0  free  summer                 o-neck   
+         228  special\_occasion     low     5.0  free  spring                 v-neck   
+         233  special\_occasion     low     5.0  free  spring                 v-neck   
+         257            casual  medium     4.0     m  spring                 o-neck   
+         260            casual     low     5.0  free  winter                 o-neck   
+         267  special\_occasion     low     5.0  free  summer                 v-neck   
+         275            casual  medium     5.0  free  winter                 o-neck   
+         282            casual     low     1.0     m  spring                 o-neck   
+         285              work  medium     5.0     m  spring                 v-neck   
+         288            casual  medium     5.0     m  autumn                 v-neck   
+         296      boho\_vintage  medium     4.0  free  summer                 o-neck   
+         300      boho\_vintage  medium     4.0     l  winter                 o-neck   
+         323      boho\_vintage     low     5.0    xl  spring                 v-neck   
+         326            casual  medium     5.0    xl  spring         slash\_and\_boat   
+         327            casual  medium     5.0    xl  summer                 v-neck   
+         328            casual  medium     5.0     m  summer                 v-neck   
+         329            casual  medium     5.0     l  spring  sweetheart\_and\_square   
+         330  special\_occasion  medium     5.0     m  spring                 o-neck   
+         335  special\_occasion     low     5.0  free  spring                 v-neck   
+         336            casual     low     5.0  free  autumn                 o-neck   
+         339            casual  medium     5.0     s  summer         bow\_and\_ruffle   
+         341            casual     low     4.0  free  spring                 o-neck   
+         343            casual  medium     5.0     l  autumn         slash\_and\_boat   
+         347              work  medium     5.0     m  summer                 o-neck   
+         348             other  medium     5.0  free  summer                 o-neck   
+         351            casual  medium     4.0     l  spring         slash\_and\_boat   
+         354            casual  medium     5.0     m  summer                 o-neck   
+         358            casual     low     4.0  free  summer                 o-neck   
+         360              work  medium     5.0     m  winter         turndowncollor   
+         368            casual     low     5.0     m  autumn                 o-neck   
+         
+              SleeveLength WaistLine Material  FabricType Decoration Pattern Type  \textbackslash{}
+         0      sleeveless    empire      nan     chiffon    ruffles       animal   
+         4    threequarter   natural      nan     chiffon       lace        print   
+         8            full   natural      nan         nan  hollowout    patchwork   
+         11     sleeveless   natural      nan     chiffon    nothing        solid   
+         14     sleeveless   natural      nan         nan    nothing        solid   
+         19     sleeveless    empire      nan         nan        bow        solid   
+         20   threequarter   natural      nan         nan    nothing        print   
+         22           full   natural      nan     chiffon    nothing        print   
+         32     sleeveless    empire      nan     chiffon    nothing       animal   
+         37     sleeveless   natural      nan         nan       lace        solid   
+         40     sleeveless   natural      nan     chiffon     sashes        solid   
+         55          short   natural      nan     chiffon    nothing        print   
+         56          short   natural      nan     chiffon    nothing    patchwork   
+         58           full   natural      nan     chiffon       lace        print   
+         62          short   natural      nan     chiffon    ruffles        print   
+         65          short   natural      nan         nan    nothing        print   
+         66          short   natural      nan         nan    nothing       animal   
+         71     halfsleeve   natural      nan         nan       lace          nan   
+         73     sleeveless   natural      nan     chiffon  hollowout        solid   
+         74     halfsleeve   natural      nan         nan    nothing          nan   
+         75     sleeveless   natural      nan     chiffon    nothing        solid   
+         81           full   natural      nan         nan       lace      leopard   
+         83          short    empire      nan         nan       lace    patchwork   
+         86   threequarter   natural      nan         nan    nothing        solid   
+         88           full   natural      nan     chiffon    nothing          nan   
+         90     sleeveless   natural      nan     chiffon    nothing        solid   
+         93     sleeveless   natural      nan         nan    nothing          nan   
+         95     sleeveless   natural      nan         nan       lace        solid   
+         97     sleeveless   natural      nan     chiffon    nothing        print   
+         105    sleeveless   natural      nan         nan    nothing        print   
+         ..            {\ldots}       {\ldots}      {\ldots}         {\ldots}        {\ldots}          {\ldots}   
+         223          full    empire      nan         nan    nothing          nan   
+         228    sleeveless   natural      nan         nan   sequined          nan   
+         233    sleeveless    empire      nan     chiffon    nothing          nan   
+         257    halfsleeve   natural      nan         nan    nothing          nan   
+         260    sleeveless   natural      nan         nan    nothing          nan   
+         267    sleeveless   natural      nan         nan    nothing          nan   
+         275    sleeveless   natural      nan         nan    nothing        solid   
+         282    halfsleeve   natural      nan     chiffon    nothing          nan   
+         285    sleeveless   natural      nan         nan    nothing          nan   
+         288    sleeveless   natural      nan     chiffon    nothing      striped   
+         296  threequarter   natural      nan         nan  hollowout          nan   
+         300         short    empire      nan         nan   sequined    patchwork   
+         323  threequarter   natural      nan     chiffon    nothing        print   
+         326          full   natural      nan         nan     sashes        solid   
+         327    halfsleeve   natural      nan  broadcloth    nothing        print   
+         328          full   natural      nan     chiffon    nothing          nan   
+         329    sleeveless    empire      nan         nan    nothing        print   
+         330    halfsleeve    empire      nan     chiffon    nothing    patchwork   
+         335    sleeveless   natural      nan         nan    nothing      striped   
+         336    sleeveless   natural      nan     chiffon   sequined        solid   
+         339    sleeveless    empire      nan         nan        bow    patchwork   
+         341          full   natural      nan     chiffon     sashes         none   
+         343    sleeveless   natural      nan         nan     sashes        solid   
+         347    sleeveless   natural      nan         nan    nothing        solid   
+         348    sleeveless   natural      nan         nan    nothing        print   
+         351  threequarter   natural      nan       dobby       lace       animal   
+         354    halfsleeve   natural      nan         nan    nothing          nan   
+         358    sleeveless   natural      nan         nan    nothing       animal   
+         360          full   natural      nan         nan    nothing        solid   
+         368    sleeveless    empire      nan     chiffon    nothing        print   
+         
+              Recommendation  
+         0                 1  
+         4                 1  
+         8                 1  
+         11                0  
+         14                1  
+         19                1  
+         20                0  
+         22                1  
+         32                1  
+         37                1  
+         40                0  
+         55                0  
+         56                1  
+         58                1  
+         62                0  
+         65                1  
+         66                1  
+         71                0  
+         73                0  
+         74                1  
+         75                0  
+         81                1  
+         83                0  
+         86                0  
+         88                0  
+         90                0  
+         93                1  
+         95                0  
+         97                1  
+         105               0  
+         ..              {\ldots}  
+         223               0  
+         228               1  
+         233               0  
+         257               1  
+         260               1  
+         267               0  
+         275               0  
+         282               0  
+         285               1  
+         288               1  
+         296               0  
+         300               1  
+         323               1  
+         326               0  
+         327               1  
+         328               0  
+         329               0  
+         330               0  
+         335               1  
+         336               0  
+         339               1  
+         341               1  
+         343               0  
+         347               1  
+         348               0  
+         351               1  
+         354               0  
+         358               0  
+         360               0  
+         368               1  
+         
+         [101 rows x 13 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{} There are 23 levels in feature \PYZdq{}Material\PYZdq{}. Reduce it to 11:}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{chiffonfabric}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{chiffon}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shiffon}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{chiffon}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{milksilk}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{silk}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{model}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{modal}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wool}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wool\PYZus{}and\PYZus{}cashmere}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cashmere}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wool\PYZus{}and\PYZus{}cashmere}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{knitting}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{knit}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{spandex}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{knit}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lycra}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{knit}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{modal}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cotton}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{other\PYZus{}materials} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lace}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{microfiber}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{linen}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{viscos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{acrylic}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{k}{for} \PY{n}{string} \PY{o+ow}{in} \PY{n}{other\PYZus{}materials}\PY{p}{:}
+             \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Material}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{string}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{other}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FabricType}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} array(['chiffon', 'broadcloth', 'jersey', 'nan', 'batik', 'flannel',
+                'worsted', 'woolen', 'dobby', 'organza', 'lace', 'sattin', 'tulle',
+                'poplin', 'corduroy', 'wollen', 'terry'], dtype=object)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{} There are 17 levels in feature \PYZdq{}FabricType\PYZdq{}. Reduce it to 6:}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FabricType}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FabricType}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{woolen}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wool}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FabricType}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FabricType}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wollen}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wool}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{other\PYZus{}fabrics} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dobby}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wool}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{poplin}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{flannel}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{terry}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lace}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{batik}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{organza}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tulle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{corduroy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sattin}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{flannael}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{k}{for} \PY{n}{string} \PY{o+ow}{in} \PY{n}{other\PYZus{}fabrics}\PY{p}{:}
+             \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FabricType}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FabricType}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{string}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{other}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decoration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} nothing       181
+         lace           48
+         sashes         39
+         beading        17
+         bow            14
+         hollowout      13
+         applique       12
+         ruffles        11
+         sequined       10
+         button          5
+         pockets         4
+         embroidary      4
+         flowers         4
+         crystal         3
+         rivet           3
+         ruched          3
+         draped          2
+         none            2
+         plain           2
+         tiered          1
+         pleat           1
+         tassel          1
+         Name: Decoration, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{} There are 22 levels in feature \PYZdq{}Decoration\PYZdq{}. Reduce it to 10:}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decoration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decoration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{none}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nothing}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decoration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decoration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{plain}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nothing}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{other\PYZus{}decorations} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{button}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{embroidary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{flowers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pockets}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ruched}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rivet}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{crystal}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{plain}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{draped}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pleat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tiered}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tassel}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{k}{for} \PY{n}{string} \PY{o+ow}{in} \PY{n}{other\PYZus{}decorations}\PY{p}{:}
+             \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decoration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decoration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{string}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{other}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pattern Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} solid        152
+         nan           81
+         print         56
+         patchwork     35
+         animal        17
+         striped       15
+         dot           11
+         geometric      5
+         leopard        2
+         floral         1
+         character      1
+         leapord        1
+         plaid          1
+         splice         1
+         none           1
+         Name: Pattern Type, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{c+c1}{\PYZsh{} There are 15 levels in feature \PYZdq{}Pattern Type\PYZdq{}. Reduce it to 8:}
+         \PY{n}{other\PYZus{}patterns} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{geometric}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{leopard}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{leapord}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{splice}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{floral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{character}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{none}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{plaid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{k}{for} \PY{n}{string} \PY{o+ow}{in} \PY{n}{other\PYZus{}patterns}\PY{p}{:}
+             \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pattern Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pattern Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{string}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{other}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} check distributions again:}
+         \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{:}
+             \PY{n}{df}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Distribution of }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{col}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_11.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_12.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{c+c1}{\PYZsh{} df[\PYZdq{}Size\PYZdq{}].value\PYZus{}counts()}
+         
+         \PY{c+c1}{\PYZsh{} \PYZsh{} Turn Size into ordinal data}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}Size\PYZdq{}] = df[\PYZdq{}Size\PYZdq{}].replace(\PYZdq{}free\PYZdq{}, \PYZdq{}m\PYZdq{})}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}Size\PYZdq{}] = df[\PYZdq{}Size\PYZdq{}].replace(\PYZdq{}s\PYZdq{}, 0)}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}Size\PYZdq{}] = df[\PYZdq{}Size\PYZdq{}].replace(\PYZdq{}m\PYZdq{}, 1)}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}Size\PYZdq{}] = df[\PYZdq{}Size\PYZdq{}].replace(\PYZdq{}l\PYZdq{}, 2)}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}Size\PYZdq{}] = df[\PYZdq{}Size\PYZdq{}].replace(\PYZdq{}xl\PYZdq{}, 3)}
+         
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}Price\PYZdq{}].value\PYZus{}counts()}
+         
+         \PY{c+c1}{\PYZsh{} \PYZsh{} Turn Price into ordinal data}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}Price\PYZdq{}] = df[\PYZdq{}Price\PYZdq{}].replace(\PYZdq{}low\PYZdq{}, 0)}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}Price\PYZdq{}] = df[\PYZdq{}Price\PYZdq{}].replace(\PYZdq{}medium\PYZdq{}, 1)}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}Price\PYZdq{}] = df[\PYZdq{}Price\PYZdq{}].replace(\PYZdq{}high\PYZdq{}, 2)}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}Price\PYZdq{}] = df[\PYZdq{}Price\PYZdq{}].replace(\PYZdq{}very\PYZhy{}high\PYZdq{}, 3)}
+         
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}Season\PYZdq{}].value\PYZus{}counts()}
+         
+         \PY{c+c1}{\PYZsh{} \PYZsh{} Turn Season into ordinal data based on apparent temperature}
+         \PY{c+c1}{\PYZsh{} \PYZsh{} summer spring autumn winter}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}Season\PYZdq{}] = df[\PYZdq{}Season\PYZdq{}].replace(\PYZdq{}summer\PYZdq{}, 0)}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}Season\PYZdq{}] = df[\PYZdq{}Season\PYZdq{}].replace(\PYZdq{}spring\PYZdq{}, 1)}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}Season\PYZdq{}] = df[\PYZdq{}Season\PYZdq{}].replace(\PYZdq{}autumn\PYZdq{}, 2)}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}Season\PYZdq{}] = df[\PYZdq{}Season\PYZdq{}].replace(\PYZdq{}winter\PYZdq{}, 3)}
+         
+         \PY{c+c1}{\PYZsh{} df.columns}
+         
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}WaistLine\PYZdq{}].value\PYZus{}counts()}
+         
+         \PY{c+c1}{\PYZsh{} \PYZsh{} Turn WaistLine into ordinal data (empire as 0, natural as 1, and dropped as 2)}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}WaistLine\PYZdq{}] = df[\PYZdq{}WaistLine\PYZdq{}].replace(\PYZdq{}empire\PYZdq{}, 0)}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}WaistLine\PYZdq{}] = df[\PYZdq{}WaistLine\PYZdq{}].replace(\PYZdq{}natural\PYZdq{}, 1)}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}WaistLine\PYZdq{}] = df[\PYZdq{}WaistLine\PYZdq{}].replace(\PYZdq{}dropped\PYZdq{}, 2)}
+         
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}SleeveLength\PYZdq{}].value\PYZus{}counts()}
+         
+         \PY{c+c1}{\PYZsh{} \PYZsh{} Turn SleeveLength into ordinal data}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}SleeveLength\PYZdq{}] = df[\PYZdq{}SleeveLength\PYZdq{}].replace(\PYZdq{}sleeveless\PYZdq{}, 0)}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}SleeveLength\PYZdq{}] = df[\PYZdq{}SleeveLength\PYZdq{}].replace(\PYZdq{}short\PYZdq{}, 1)}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}SleeveLength\PYZdq{}] = df[\PYZdq{}SleeveLength\PYZdq{}].replace(\PYZdq{}halfsleeve\PYZdq{}, 2)}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}SleeveLength\PYZdq{}] = df[\PYZdq{}SleeveLength\PYZdq{}].replace(\PYZdq{}threequarter\PYZdq{}, 3)}
+         \PY{c+c1}{\PYZsh{} df[\PYZdq{}SleeveLength\PYZdq{}] = df[\PYZdq{}SleeveLength\PYZdq{}].replace(\PYZdq{}full\PYZdq{}, 4)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{c+c1}{\PYZsh{} pd.Series(df[df.columns].apply(lambda x: x.corr(df[\PYZdq{}Recommendation\PYZdq{}]))).sort\PYZus{}values(ascending=False)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{c+c1}{\PYZsh{} waiseline          66}
+         \PY{c+c1}{\PYZsh{} Material          101}
+         \PY{c+c1}{\PYZsh{} FabricType        203}
+         \PY{c+c1}{\PYZsh{} Pattern Type       81}
+         
+         \PY{c+c1}{\PYZsh{} drop\PYZus{}features = [\PYZdq{}WaistLine\PYZdq{}, \PYZdq{}Material\PYZdq{}, \PYZdq{}FabricType\PYZdq{}, \PYZdq{}Pattern Type\PYZdq{}]}
+         \PY{c+c1}{\PYZsh{} df = df.drop(columns = drop\PYZus{}features)}
+         
+         \PY{n}{keep\PYZus{}features} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Season}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Recommendation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{keep\PYZus{}features}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} keep\PYZus{}features = [\PYZdq{}Price\PYZdq{}, \PYZdq{}Rating\PYZdq{}, \PYZdq{}Recommendation\PYZdq{}]}
+         \PY{c+c1}{\PYZsh{} df = df[keep\PYZus{}features]}
+         \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}46}]:}     Price  Rating  Recommendation
+         0     low     5.0               1
+         1  medium     5.0               1
+         2     low     4.0               0
+         3  medium     5.0               0
+         4     low     5.0               1
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{c+c1}{\PYZsh{} tableau needs all data also ordinal for exploration}
+         \PY{n}{df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tableau\PYZus{}ordinal\PYZus{}data.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} df.to\PYZus{}csv(\PYZdq{}clean\PYZus{}data.csv\PYZdq{}, index=False)}
+\end{Verbatim}
+
+
+    \section{One\_hot\_encoding}\label{one_hot_encoding}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:}    Rating  Recommendation  Price\_high  Price\_low  Price\_medium  \textbackslash{}
+         0     5.0               1           0          1             0   
+         1     5.0               1           0          0             1   
+         2     4.0               0           0          1             0   
+         3     5.0               0           0          0             1   
+         4     5.0               1           0          1             0   
+         
+            Price\_very-high  
+         0                0  
+         1                0  
+         2                0  
+         3                0  
+         4                0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:} ['Rating',
+          'Recommendation',
+          'Price\_high',
+          'Price\_low',
+          'Price\_medium',
+          'Price\_very-high']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{file\PYZus{}path} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{encoded\PYZus{}data.csv}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{n}{file\PYZus{}path}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{SVC Model}\label{svc-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{target} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Recommendation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{target\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{negative}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{positive}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Recommendation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{feature\PYZus{}names} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{columns}
+         \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:}    Rating  Price\_high  Price\_low  Price\_medium  Price\_very-high
+         0     5.0           0          1             0                0
+         1     5.0           0          0             1                0
+         2     4.0           0          1             0                0
+         3     5.0           0          0             1                0
+         4     5.0           0          1             0                0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Recommendation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{feature\PYZus{}names} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{columns}
+         \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}53}]:}    Rating  Price\_high  Price\_low  Price\_medium  Price\_very-high
+         0     5.0           0          1             0                0
+         1     5.0           0          0             1                0
+         2     4.0           0          1             0                0
+         3     5.0           0          0             1                0
+         4     5.0           0          1             0                0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{target}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{2018}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{n}{test\PYZus{}size}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{MinMaxScaler}
+         \PY{n}{scaling} \PY{o}{=} \PY{n}{MinMaxScaler}\PY{p}{(}\PY{n}{feature\PYZus{}range}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+         \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{scaling}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+         \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{scaling}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{c+c1}{\PYZsh{} Support vector machine linear classifier}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{pipeline} \PY{k}{import} \PY{n}{make\PYZus{}pipeline}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{SVC} 
+         \PY{n}{model} \PY{o}{=} \PY{n}{make\PYZus{}pipeline}\PY{p}{(}\PY{n}{SVC}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}56}]:} Pipeline(memory=None,
+              steps=[('svc', SVC(C=1.0, cache\_size=200, class\_weight=None, coef0=0.0,
+           decision\_function\_shape='ovr', degree=3, gamma='auto', kernel='linear',
+           max\_iter=-1, probability=False, random\_state=None, shrinking=True,
+           tol=0.001, verbose=False))])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{c+c1}{\PYZsh{} Model Accuracy}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Acc: }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{model}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test Acc: 0.500
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{c+c1}{\PYZsh{} Calculate classification report}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{classification\PYZus{}report}
+         \PY{n}{predictions} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{predictions}\PY{p}{,}
+                                     \PY{n}{target\PYZus{}names}\PY{o}{=}\PY{n}{target\PYZus{}names}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+             precision    recall  f1-score   support
+
+   negative       0.50      1.00      0.67        19
+   positive       0.00      0.00      0.00        19
+
+avg / total       0.25      0.50      0.33        38
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/anaconda3/envs/PythonData/lib/python3.6/site-packages/sklearn/metrics/classification.py:1135: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples.
+  'precision', 'predicted', average, warn\_for)
+
+    \end{Verbatim}
+
+    \section{Grid Search}\label{grid-search}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{c+c1}{\PYZsh{} Support vector machine linear classifier}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{pipeline} \PY{k}{import} \PY{n}{make\PYZus{}pipeline}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{SVC} 
+         \PY{n}{model} \PY{o}{=} \PY{n}{make\PYZus{}pipeline}\PY{p}{(}\PY{n}{SVC}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{c+c1}{\PYZsh{} Create the GridSearch estimator along with a parameter object containing the values to adjust}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{GridSearchCV}
+         \PY{n}{param\PYZus{}grid} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{svc\PYZus{}\PYZus{}C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{svc\PYZus{}\PYZus{}gamma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mf}{0.0001}\PY{p}{,} \PY{l+m+mf}{0.001}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{]}\PY{p}{\PYZcb{}}
+         \PY{n}{grid} \PY{o}{=} \PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{param\PYZus{}grid}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{c+c1}{\PYZsh{} Fit the model using the grid search estimator. }
+         \PY{c+c1}{\PYZsh{} This will take the SVC model and try each combination of parameters}
+         \PY{n}{grid}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[Parallel(n\_jobs=1)]: Done   1 out of   1 | elapsed:    0.0s remaining:    0.0s
+[Parallel(n\_jobs=1)]: Done   2 out of   2 | elapsed:    0.0s remaining:    0.0s
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Fitting 3 folds for each of 9 candidates, totalling 27 fits
+[CV] svc\_\_C=1, svc\_\_gamma=0.0001 {\ldots}
+[CV]  svc\_\_C=1, svc\_\_gamma=0.0001, score=0.6052631578947368, total=   0.0s
+[CV] svc\_\_C=1, svc\_\_gamma=0.0001 {\ldots}
+[CV]  svc\_\_C=1, svc\_\_gamma=0.0001, score=0.6140350877192983, total=   0.0s
+[CV] svc\_\_C=1, svc\_\_gamma=0.0001 {\ldots}
+[CV]  svc\_\_C=1, svc\_\_gamma=0.0001, score=0.5964912280701754, total=   0.0s
+[CV] svc\_\_C=1, svc\_\_gamma=0.001 {\ldots}
+[CV]  svc\_\_C=1, svc\_\_gamma=0.001, score=0.6052631578947368, total=   0.0s
+[CV] svc\_\_C=1, svc\_\_gamma=0.001 {\ldots}
+[CV]  svc\_\_C=1, svc\_\_gamma=0.001, score=0.6140350877192983, total=   0.0s
+[CV] svc\_\_C=1, svc\_\_gamma=0.001 {\ldots}
+[CV]  svc\_\_C=1, svc\_\_gamma=0.001, score=0.5964912280701754, total=   0.0s
+[CV] svc\_\_C=1, svc\_\_gamma=0.01 {\ldots}
+[CV]  svc\_\_C=1, svc\_\_gamma=0.01, score=0.6052631578947368, total=   0.0s
+[CV] svc\_\_C=1, svc\_\_gamma=0.01 {\ldots}
+[CV]  svc\_\_C=1, svc\_\_gamma=0.01, score=0.6140350877192983, total=   0.0s
+[CV] svc\_\_C=1, svc\_\_gamma=0.01 {\ldots}
+[CV]  svc\_\_C=1, svc\_\_gamma=0.01, score=0.5964912280701754, total=   0.0s
+[CV] svc\_\_C=5, svc\_\_gamma=0.0001 {\ldots}
+[CV]  svc\_\_C=5, svc\_\_gamma=0.0001, score=0.6052631578947368, total=   0.0s
+[CV] svc\_\_C=5, svc\_\_gamma=0.0001 {\ldots}
+[CV]  svc\_\_C=5, svc\_\_gamma=0.0001, score=0.6140350877192983, total=   0.0s
+[CV] svc\_\_C=5, svc\_\_gamma=0.0001 {\ldots}
+[CV]  svc\_\_C=5, svc\_\_gamma=0.0001, score=0.5964912280701754, total=   0.0s
+[CV] svc\_\_C=5, svc\_\_gamma=0.001 {\ldots}
+[CV]  svc\_\_C=5, svc\_\_gamma=0.001, score=0.6052631578947368, total=   0.0s
+[CV] svc\_\_C=5, svc\_\_gamma=0.001 {\ldots}
+[CV]  svc\_\_C=5, svc\_\_gamma=0.001, score=0.6140350877192983, total=   0.0s
+[CV] svc\_\_C=5, svc\_\_gamma=0.001 {\ldots}
+[CV]  svc\_\_C=5, svc\_\_gamma=0.001, score=0.5964912280701754, total=   0.0s
+[CV] svc\_\_C=5, svc\_\_gamma=0.01 {\ldots}
+[CV]  svc\_\_C=5, svc\_\_gamma=0.01, score=0.6052631578947368, total=   0.0s
+[CV] svc\_\_C=5, svc\_\_gamma=0.01 {\ldots}
+[CV]  svc\_\_C=5, svc\_\_gamma=0.01, score=0.6140350877192983, total=   0.0s
+[CV] svc\_\_C=5, svc\_\_gamma=0.01 {\ldots}
+[CV]  svc\_\_C=5, svc\_\_gamma=0.01, score=0.5964912280701754, total=   0.0s
+[CV] svc\_\_C=10, svc\_\_gamma=0.0001 {\ldots}
+[CV]  svc\_\_C=10, svc\_\_gamma=0.0001, score=0.6052631578947368, total=   0.0s
+[CV] svc\_\_C=10, svc\_\_gamma=0.0001 {\ldots}
+[CV]  svc\_\_C=10, svc\_\_gamma=0.0001, score=0.6140350877192983, total=   0.0s
+[CV] svc\_\_C=10, svc\_\_gamma=0.0001 {\ldots}
+[CV]  svc\_\_C=10, svc\_\_gamma=0.0001, score=0.5964912280701754, total=   0.0s
+[CV] svc\_\_C=10, svc\_\_gamma=0.001 {\ldots}
+[CV]  svc\_\_C=10, svc\_\_gamma=0.001, score=0.6052631578947368, total=   0.0s
+[CV] svc\_\_C=10, svc\_\_gamma=0.001 {\ldots}
+[CV]  svc\_\_C=10, svc\_\_gamma=0.001, score=0.6140350877192983, total=   0.0s
+[CV] svc\_\_C=10, svc\_\_gamma=0.001 {\ldots}
+[CV]  svc\_\_C=10, svc\_\_gamma=0.001, score=0.5964912280701754, total=   0.0s
+[CV] svc\_\_C=10, svc\_\_gamma=0.01 {\ldots}
+[CV]  svc\_\_C=10, svc\_\_gamma=0.01, score=0.6052631578947368, total=   0.0s
+[CV] svc\_\_C=10, svc\_\_gamma=0.01 {\ldots}
+[CV]  svc\_\_C=10, svc\_\_gamma=0.01, score=0.6140350877192983, total=   0.0s
+[CV] svc\_\_C=10, svc\_\_gamma=0.01 {\ldots}
+[CV]  svc\_\_C=10, svc\_\_gamma=0.01, score=0.5964912280701754, total=   0.0s
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[Parallel(n\_jobs=1)]: Done  27 out of  27 | elapsed:    0.2s finished
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}61}]:} GridSearchCV(cv=None, error\_score='raise',
+                estimator=Pipeline(memory=None,
+              steps=[('svc', SVC(C=1.0, cache\_size=200, class\_weight=None, coef0=0.0,
+           decision\_function\_shape='ovr', degree=3, gamma='auto', kernel='linear',
+           max\_iter=-1, probability=False, random\_state=None, shrinking=True,
+           tol=0.001, verbose=False))]),
+                fit\_params=None, iid=True, n\_jobs=1,
+                param\_grid=\{'svc\_\_C': [1, 5, 10], 'svc\_\_gamma': [0.0001, 0.001, 0.01]\},
+                pre\_dispatch='2*n\_jobs', refit=True, return\_train\_score='warn',
+                scoring=None, verbose=3)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{c+c1}{\PYZsh{} List the best parameters for this dataset}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{grid}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{'svc\_\_C': 1, 'svc\_\_gamma': 0.0001\}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{c+c1}{\PYZsh{} List the best score}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{grid}\PY{o}{.}\PY{n}{best\PYZus{}score\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.6052631578947368
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{c+c1}{\PYZsh{} Make predictions with the hypertuned model}
+         \PY{n}{predictions} \PY{o}{=} \PY{n}{grid}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{c+c1}{\PYZsh{} Calculate classification report}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{classification\PYZus{}report}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{predictions}\PY{p}{,}
+                                     \PY{n}{target\PYZus{}names}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{negative}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{positive}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+             precision    recall  f1-score   support
+
+   negative       0.50      1.00      0.67        19
+   positive       0.00      0.00      0.00        19
+
+avg / total       0.25      0.50      0.33        38
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/anaconda3/envs/PythonData/lib/python3.6/site-packages/sklearn/metrics/classification.py:1135: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples.
+  'precision', 'predicted', average, warn\_for)
+
+    \end{Verbatim}
+
+    \section{Deep Learning}\label{deep-learning}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         
+         \PY{k+kn}{import} \PY{n+nn}{warnings}
+         \PY{n}{warnings}\PY{o}{.}\PY{n}{simplefilter}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+ne}{FutureWarning}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Data Pre-Processing}\label{data-pre-processing}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{file\PYZus{}path}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{target} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Recommendation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{target\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{negative}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{positive}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Recommendation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{feature\PYZus{}names} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{columns}
+         \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Recommendation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{feature\PYZus{}names} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{columns}
+         \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{target}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{2018}\PY{p}{,} \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{n}{test\PYZus{}size}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{LabelEncoder}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{to\PYZus{}categorical}
+         
+         \PY{c+c1}{\PYZsh{} Step 1: Label\PYZhy{}encode data set}
+         \PY{n}{label\PYZus{}encoder} \PY{o}{=} \PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+         \PY{n}{label\PYZus{}encoder}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{encoded\PYZus{}y\PYZus{}train} \PY{o}{=} \PY{n}{label\PYZus{}encoder}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{encoded\PYZus{}y\PYZus{}test} \PY{o}{=} \PY{n}{label\PYZus{}encoder}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Step 2: Convert encoded labels to one\PYZhy{}hot\PYZhy{}encoding}
+         \PY{n}{y\PYZus{}train\PYZus{}categorical} \PY{o}{=} \PY{n}{to\PYZus{}categorical}\PY{p}{(}\PY{n}{encoded\PYZus{}y\PYZus{}train}\PY{p}{)}
+         \PY{n}{y\PYZus{}test\PYZus{}categorical} \PY{o}{=} \PY{n}{to\PYZus{}categorical}\PY{p}{(}\PY{n}{encoded\PYZus{}y\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using TensorFlow backend.
+
+    \end{Verbatim}
+
+    \section{Create a Deep Learning
+Model}\label{create-a-deep-learning-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Sequential}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Dense}
+         
+         \PY{k}{def} \PY{n+nf}{build\PYZus{}classifier}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{classifier} \PY{o}{=} \PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n}{units}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{input\PYZus{}dim}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n}{units}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n}{units}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{optimizer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{adam}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{metrics}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{k}{return} \PY{n}{classifier}
+         
+         \PY{c+c1}{\PYZsh{} Create a Keras model that\PYZsq{}s compatible with scikit\PYZhy{}learn}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{callbacks} \PY{k}{import} \PY{n}{EarlyStopping}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{wrappers}\PY{n+nn}{.}\PY{n+nn}{scikit\PYZus{}learn} \PY{k}{import} \PY{n}{KerasClassifier}
+         \PY{n}{keras\PYZus{}classifier} \PY{o}{=} \PY{n}{KerasClassifier}\PY{p}{(}\PY{n}{build\PYZus{}classifier}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{60}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{callbacks}\PY{o}{=}\PY{p}{[}\PY{n}{EarlyStopping}\PY{p}{(}\PY{n}{monitor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{acc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{patience}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{pipeline} \PY{k}{import} \PY{n}{make\PYZus{}pipeline}
+         \PY{n}{model} \PY{o}{=} \PY{n}{make\PYZus{}pipeline}\PY{p}{(}\PY{n}{keras\PYZus{}classifier}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train\PYZus{}categorical}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 1/60
+ - 1s - loss: 0.7442 - acc: 0.4415
+Epoch 2/60
+ - 0s - loss: 0.6835 - acc: 0.5848
+Epoch 3/60
+ - 0s - loss: 0.6725 - acc: 0.5994
+Epoch 4/60
+ - 0s - loss: 0.6706 - acc: 0.6140
+Epoch 5/60
+ - 0s - loss: 0.6677 - acc: 0.6140
+Epoch 6/60
+ - 0s - loss: 0.6694 - acc: 0.6140
+Epoch 7/60
+ - 0s - loss: 0.6638 - acc: 0.6140
+Epoch 8/60
+ - 0s - loss: 0.6632 - acc: 0.6140
+Epoch 9/60
+ - 0s - loss: 0.6622 - acc: 0.6140
+Epoch 10/60
+ - 0s - loss: 0.6602 - acc: 0.6140
+Epoch 11/60
+ - 0s - loss: 0.6590 - acc: 0.6140
+Epoch 12/60
+ - 0s - loss: 0.6583 - acc: 0.6140
+Epoch 13/60
+ - 0s - loss: 0.6676 - acc: 0.6140
+Epoch 14/60
+ - 0s - loss: 0.6570 - acc: 0.6140
+Epoch 15/60
+ - 0s - loss: 0.6578 - acc: 0.6140
+Epoch 16/60
+ - 0s - loss: 0.6615 - acc: 0.5877
+Epoch 17/60
+ - 0s - loss: 0.6603 - acc: 0.6140
+Epoch 18/60
+ - 0s - loss: 0.6541 - acc: 0.6140
+Epoch 19/60
+ - 0s - loss: 0.6572 - acc: 0.6228
+Epoch 20/60
+ - 0s - loss: 0.6613 - acc: 0.6170
+Epoch 21/60
+ - 0s - loss: 0.6686 - acc: 0.5877
+Epoch 22/60
+ - 0s - loss: 0.6637 - acc: 0.6082
+Epoch 23/60
+ - 0s - loss: 0.6557 - acc: 0.6140
+Epoch 24/60
+ - 0s - loss: 0.6554 - acc: 0.6170
+Epoch 25/60
+ - 0s - loss: 0.6519 - acc: 0.6140
+Epoch 26/60
+ - 0s - loss: 0.6524 - acc: 0.6140
+Epoch 27/60
+ - 0s - loss: 0.6539 - acc: 0.6199
+Epoch 28/60
+ - 0s - loss: 0.6646 - acc: 0.5994
+Epoch 29/60
+ - 0s - loss: 0.6535 - acc: 0.6170
+Epoch 00029: early stopping
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}74}]:} Pipeline(memory=None,
+              steps=[('kerasclassifier', <keras.wrappers.scikit\_learn.KerasClassifier object at 0x1a28c9ada0>)])
+\end{Verbatim}
+            
+    \subsection{Quantify our Trained
+Model}\label{quantify-our-trained-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{n}{model\PYZus{}loss}\PY{p}{,} \PY{n}{model\PYZus{}accuracy} \PY{o}{=} \PY{n}{keras\PYZus{}classifier}\PY{o}{.}\PY{n}{model}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}categorical}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Normal Neural Network \PYZhy{} Loss: }\PY{l+s+si}{\PYZob{}model\PYZus{}loss\PYZcb{}}\PY{l+s+s2}{, Accuracy: }\PY{l+s+si}{\PYZob{}model\PYZus{}accuracy\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Normal Neural Network - Loss: 0.7224877162983543, Accuracy: 0.5263157926107708
+
+    \end{Verbatim}
+
+    \section{Saving a Trained Model}\label{saving-a-trained-model}
+
+We can save our trained models using the HDF5 binary format with the
+extension \texttt{.h5}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{c+c1}{\PYZsh{} Save the model}
+         \PY{n}{keras\PYZus{}classifier}\PY{o}{.}\PY{n}{model}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{model\PYZus{}trained.h5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Loading a Model}\label{loading-a-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{c+c1}{\PYZsh{} Load the model}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{load\PYZus{}model}
+         \PY{n}{voice\PYZus{}model} \PY{o}{=} \PY{n}{load\PYZus{}model}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{model\PYZus{}trained.h5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Evaluating the loaded
+model}\label{evaluating-the-loaded-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{n}{model\PYZus{}loss}\PY{p}{,} \PY{n}{model\PYZus{}accuracy} \PY{o}{=} \PY{n}{voice\PYZus{}model}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}categorical}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Normal Neural Network \PYZhy{} Loss: }\PY{l+s+si}{\PYZob{}model\PYZus{}loss\PYZcb{}}\PY{l+s+s2}{, Accuracy: }\PY{l+s+si}{\PYZob{}model\PYZus{}accuracy\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Normal Neural Network - Loss: 0.7224877162983543, Accuracy: 0.5263157926107708
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
