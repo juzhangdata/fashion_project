@@ -1,27 +1,27 @@
 ﻿test size,features,level reduction,Model,Score,to_ordinal
 0.25,12,no,SVC,0.55,no
-0.25,12,no,Gridsearch,0.52,no
+0.25,12,no,GridSearch,0.52,no
 0.25,12,no,Deep Learning,0.53,no
 0.25,12,yes,SVC,0.47,no
-0.25,12,yes,Gridsearch,0.57,no
+0.25,12,yes,GridSearch,0.57,no
 0.25,12,yes,Deep Learning,0.51,no
 0.1,8,yes,SVC,0.45,no
-0.1,8,yes,Gridsearch,0.51,no
+0.1,8,yes,GridSearch,0.51,no
 0.1,8,yes,Deep Learning,0.66,no
 0.25,8,yes,SVC,0.52,no
-0.25,8,yes,Gridsearch,0.55,no
+0.25,8,yes,GridSearch,0.55,no
 0.25,8,yes,Deep Learning,0.51,no
 0.5,8,yes,SVC,0.45,no
-0.5,8,yes,Gridsearch,0.55,no
+0.5,8,yes,GridSearch,0.55,no
 0.5,8,yes,Deep Learning,0.55,no
 0.1,4,yes,SVC,0.45,no
-0.1,4,yes,Gridsearch,0.65,no
+0.1,4,yes,GridSearch,0.65,no
 0.1,4,yes,Deep Learning,0.5,no
 0.25,4,yes,SVC,0.54,no
-0.25,4,yes,Gridsearch,0.65,no
+0.25,4,yes,GridSearch,0.65,no
 0.25,4,yes,Deep Learning,0.54,no
 0.5,4,yes,SVC,0.54,no
-0.5,4,yes,Gridsearch,0.65,no
+0.5,4,yes,GridSearch,0.65,no
 0.5,4,yes,Deep Learning,0.51,no
 0.1,4,yes,SVC,0.5,yes
 0.1,4,yes,GridSearch,0.59,yes
@@ -32,3 +32,6 @@
 0.1,12,yes,SVC,0.47,yes
 0.1,12,yes,GridSearch,0.55,yes
 0.1,12,yes,Deep Learning,0.58,yes
+0.5,12,yes,SVC,0.49,yes
+0.5,12,yes,GridSearch,0.61,yes
+0.5,12,yes,Deep Learning,0.5,yes
